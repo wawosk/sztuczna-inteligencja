@@ -15,6 +15,11 @@ class PerceptronProsty(BaseEstimator, ClassifierMixin):
             return -1
 
     def fit(self, X: np.ndarray, y: np.ndarray):
+
+        #bias
+        ones_column = np.ones((X.shape[0], 1))
+        np.hstack((ones_column, X))
+
         self.w = np.zeros(X.shape[1])
         k = 0
         bledy = []
@@ -42,6 +47,10 @@ class PerceptronProsty(BaseEstimator, ClassifierMixin):
         self.iteracje = maxiter
 
     def predict(self, X):
+        #bias
+        ones_column = np.ones((X.shape[0], 1))
+        np.hstack((ones_column, X))
+
         predictions = []
         for i in range(X.shape[0]):
             predictions.append(self.decision_function(X[i]))
